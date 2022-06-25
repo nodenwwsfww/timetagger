@@ -278,57 +278,6 @@ class BaseDialog:
             self.close()
 
 
-class DemoInfoDialog(BaseDialog):
-    """Dialog to show as the demo starts up."""
-
-    EXIT_ON_CLICK_OUTSIDE = True
-
-    def open(self):
-        """Show/open the dialog ."""
-        html = """
-            <h1>Demo
-                <button type='button'><i class='fas'>\uf00d</i></button>
-            </h1>
-            <p>
-            This demo shows 5 years of randomly generated time tracking data.
-            Have a look around!
-            </p><p>
-            <i>Hit Escape or click anywhere outside of this dialog to close it.</i>
-            </p>
-        """
-        self.maindiv.innerHTML = html
-
-        close_but = self.maindiv.children[0].children[-1]
-        close_but.onclick = self.close
-        super().open(None)
-
-
-class SandboxInfoDialog(BaseDialog):
-    """Dialog to show as the sandbox starts up."""
-
-    EXIT_ON_CLICK_OUTSIDE = True
-
-    def open(self):
-        """Show/open the dialog ."""
-        html = """
-            <h1>Sandbox
-                <button type='button'><i class='fas'>\uf00d</i></button>
-            </h1>
-            <p>
-            The TimeTagger sandbox starts without any records. You can play around
-            or try importing records. The data is not synced to the server and
-            will be lost as soon as you leave this page.
-            </p><p>
-            <i>Hit Escape or click anywhere outside of this dialog to close it.</i>
-            </p>
-        """
-        self.maindiv.innerHTML = html
-
-        close_but = self.maindiv.children[0].children[-1]
-        close_but.onclick = self.close
-        super().open(None)
-
-
 class NotificationDialog(BaseDialog):
     """Dialog to show a message to the user."""
 
@@ -379,11 +328,7 @@ class MenuDialog(BaseDialog):
         is_installable = window.pwa and window.pwa.deferred_prompt
 
         # Display sensible text in "header"
-        if window.store.__name__.startswith("Demo"):
-            text = "This is the Demo"
-        elif window.store.__name__.startswith("Sandbox"):
-            text = "This is the Sandbox"
-        elif window.store.get_auth:
+        if window.store.get_auth:
             auth = window.store.get_auth()
             if auth:
                 text = "Signed in as " + auth.username
@@ -391,17 +336,10 @@ class MenuDialog(BaseDialog):
                 text = "Not signed in"
         loggedinas.innerText = text
 
-        whatsnew = "What's new"
-        whatsnew_url = "https://github.com/almarklein/timetagger/releases"
-        if window.timetaggerversion:
-            whatsnew += " in version " + window.timetaggerversion.lstrip("v")
-
         container = self.maindiv
         for icon, show, title, func in [
             (None, True, "External pages", None),
-            ("\uf015", True, "Homepage", "/"),
-            ("\uf059", True, "Get tips and help", "https://timetagger.app/support"),
-            ("\uf0a1", True, whatsnew, whatsnew_url),
+            ("\uf015", True, "Homepage", "/timetagger/app/"),
             (None, store_valid, "Manage", None),
             ("\uf002", store_valid, "Search records and tags", self._search),
             ("\uf56f", store_valid, "Import records", self._import),

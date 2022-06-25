@@ -34,4 +34,11 @@ main a.ctabutton:hover {
 ----
 
 This is the stub index page for TimeTagger,
-time-tracker that feels lightweight and has powerful reporting.
+an open source time-tracker that feels lightweight and has powerful reporting.
+
+Links:
+
+* [Main website](https://timetagger.app)
+* [Source code on Github](https://github.com/almarklein/timetagger)
+* [Docs on RTD](https://timetagger.readthedocs.io)
+* [CLI tool](https://github.com/almarklein/timetagger_cli)

@@ -1,7 +1,7 @@
 # Login
 
 <script src='./app/tools.js'></script>
-
+<script src='./app/locale.js'></script>
 <script>
 async function login(payload) {
 
@@ -66,4 +66,12 @@ window.addEventListener('load', load);
 <br />
 <button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' >Login as default user (on localhost)</button>
 
+<br/>
+
+<select data-i18n-switcher class="locale-switcher">
+    <option value="en">English</option>
+    <option value="ru">Russian (Русский)</option>
+</select>
+
 <p id='result'></p>
+

@@ -1064,13 +1064,7 @@ class TopWidget(Widget):
         )
 
     def _draw_menu_button(self, ctx, x1, y1, x2, y2):
-
-        if window.store.__name__.startswith("Demo"):
-            text = "Demo"
-        elif window.store.__name__.startswith("Sandbox"):
-            text = "Sandbox"
-        else:
-            text = ""
+        text = ""
 
         sync_radius = 7
         yoffset = -6 if len(text) else 0
