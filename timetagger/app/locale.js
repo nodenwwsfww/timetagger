@@ -29,18 +29,20 @@ const localesData = {
     "notify-not-available": "Не доступно.",
     "notify-reset-web-token": "Сброс веб токена ...",
     "notify-logging-out": "Выходим ...",
-    "external-pages": "External pages",
-    "homepage": "Homepage",
-    "manage": "Manage",
+    "you-are-logged-out": "Вам необходимо авторизоваться.",
+    "external-pages": "Внешние ссылки",
+    "homepage": "Главная",
+    "manage": "Манаге",
     "search-records": "Search records and tags",
     "import-records": "Import records",
     "export-all-records": "Export all records",
     "account": "Account",
     "user": "User",
-    "settings": "Settings",
-    "login": "Login",
+    "settings": "Сеттингс",
+    "login": "Логин",
     "logout": "Logout",
-    "install-this-app": "<b>Install this app</b>"
+    "install-this-app": "<b>Install this app</b>",
+    "timeline": "ТаймЛинэ"
   },
 
   "en": {
@@ -55,6 +57,7 @@ const localesData = {
     "menubar-home": "Home",
     "menubar-account": "Account",
     "login-as-localhost": "Login as default user (on localhost)",
+    "signed-in-as": "Signed in as ",
     "header-login": "Login",
     "header-account": "Account",
     "header-auth-status": "Authentication status",
@@ -95,7 +98,8 @@ const localesData = {
     "settings": "Settings",
     "login": "Login",
     "logout": "Logout",
-    "install-this-app": "<b>Install this app</b>"
+    "install-this-app": "<b>Install this app</b>",
+    "timeline": "Timeline"
 
   },
   "tr": {
@@ -110,6 +114,7 @@ const localesData = {
     "menubar-home": "Ev",
     "menubar-account": "Hesap",
     "login-as-localhost": "Varsayılan kullanıcı olarak giriş yapın (LocalHost'ta)",
+    "signed-in-as": "Signed in as ",
     "header-login": "Giriş yapmak",
     "header-account": "Hesap",
     "header-auth-status": "Kimlik Doğrulama Durumu",

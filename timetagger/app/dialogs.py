@@ -342,6 +342,7 @@ class MenuDialog(BaseDialog):
 
         is_installable = window.pwa and window.pwa.deferred_prompt
 
+        self.updateLocales()
         # Display sensible text in "header"
         if window.store.get_auth:
             auth = window.store.get_auth()
@@ -349,24 +350,24 @@ class MenuDialog(BaseDialog):
                 text = "Signed in as " + auth.username
             else:
                 text = "Not signed in"
+                text = self.localesData[window.locale]["login-status"]
         loggedinas.innerText = text
 
         container = self.maindiv
-        self.updateLocales()
         for icon, show, title, func in [
-            (None, True, "External pages", None),
+            (None, True, self.localesData[window.locale]["external-pages"], None),
             ("\uf015", True, self.localesData[window.locale]["homepage"], "/timetagger/app/"),
-            (None, store_valid, "Manage", None),
-            ("\uf002", store_valid, "Search records and tags", self._search),
-            ("\uf56f", store_valid, "Import records", self._import),
-            ("\uf56e", store_valid, "Export all records", self._export),
-            (None, True, "User", None),
-            ("\uf013", store_valid, "Settings", self._show_settings),
+            (None, store_valid, self.localesData[window.locale]["manage"], None),
+            ("\uf002", store_valid, self.localesData[window.locale]["search-records"], self._search),
+            ("\uf56f", store_valid, self.localesData[window.locale]["import-records"], self._import),
+            ("\uf56e", store_valid, self.localesData[window.locale]["export-all-records"], self._export),
+            (None, True, self.localesData[window.locale]["user"], None),
+            ("\uf013", store_valid, self.localesData[window.locale]["settings"], self._show_settings),
             ("\uf2bd", True, self.localesData[window.locale]["account"], "../account"),
-            ("\uf2f6", not logged_in, "Login", "../login"),
-            ("\uf2f5", logged_in, "Logout", "../logout"),
+            ("\uf2f6", not logged_in, self.localesData[window.locale]["login"], "../login"),
+            ("\uf2f5", logged_in, self.localesData[window.locale]["logout"], "../logout"),
             (None, is_installable, None, None),
-            ("\uf3fa", is_installable, "<b>Install this app</b>", self._do_install),
+            ("\uf3fa", is_installable, self.localesData[window.locale]["install-this-app"], self._do_install),
         ]:
             if not show:
                 continue

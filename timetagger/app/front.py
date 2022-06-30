@@ -1554,6 +1554,7 @@ class RecordsWidget(Widget):
         self._pointer_inertia = []  # track last n move events
 
     def on_draw(self, ctx):
+        updateLocales()
         x1, y1, x2, y2 = self.rect
         self._picker.clear()
 
@@ -1616,6 +1617,7 @@ class RecordsWidget(Widget):
         # Draw title text
         if self._canvas.w > 700:
             text1 = "Timeline"
+            text1 = localesData[window.locale]["timeline"]
             ctx.textAlign = "left"
             ctx.textBaseline = "top"
             ctx.font = "bold " + (FONT.size * 1.4) + "px " + FONT.mono
