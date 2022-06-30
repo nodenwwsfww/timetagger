@@ -26,6 +26,22 @@ PI = 3.141_592_653_589_793
 
 COLORS = {}
 
+# localesData = window.localesData
+
+localesData = {
+    "en": {
+        "you-are-logged-out": "You are logged out.",
+        "login": "Login"
+    },
+    "ru": {
+        "you-are-logged-out": "Вы не авторизованы.",
+        "login": "Войти"
+    },
+    "tr": {
+        "you-are-logged-out": "You are logged out.",
+        "login": "Login"
+    }
+}
 # These get updated when the canvas resizes
 FONT = {
     "size": 16,
@@ -35,6 +51,11 @@ FONT = {
     "default": "Ubuntu, Arial, sans-serif",
 }
 
+
+def updateLocales():
+    if window.localesData:
+        for key in localesData:
+            localesData[key] = window.localesData[key]
 
 def init_module():
     set_width_mode()
@@ -293,6 +314,11 @@ class TimeTaggerCanvas(BaseCanvas):
             auth = window.store.get_auth()
             if not auth:
                 cantuse = "You are logged out."
+
+                if window.locale and window.localesData and window.locale in localesData:
+                    updateLocales()
+                    cantuse = localesData[window.locale]["you-are-logged-out"]
+
             elif auth.cantuse:
                 cantuse = auth.cantuse
 
@@ -925,6 +951,11 @@ class TopWidget(Widget):
         self._draw_menu_button(ctx, x1, y1, x2, y2)
 
         # If menu-only, also draw login, then exit
+        button_text = "Log In"
+        updateLocales()
+        if window.locale and window.locale in localesData:
+            button_text = localesData[window.locale]["btn-login"]
+
         if menu_only:
             self._draw_button(
                 ctx,
@@ -932,7 +963,7 @@ class TopWidget(Widget):
                 y3,
                 None,
                 h,
-                "Login",
+                button_text,
                 "login",
                 "",
                 {"ref": "topcenter"},

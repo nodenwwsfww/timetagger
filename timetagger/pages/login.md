@@ -1,4 +1,4 @@
-# Login
+<h1 data-i18n-key="header-login" id="login-header">Login</h1>
 
 <script src='./app/tools.js'></script>
 <script src='./app/locale.js'></script>
@@ -21,12 +21,16 @@ async function login(payload) {
     // Handle response
     if (res.status != 200) {
         let text = await res.text();
-        el.innerText = "Could not get token: " + text;
-        el.innerHTML = el.innerHTML + "<br><a href='../'>TimeTagger home</a>";
+        el.setAttribute("data-i18n-key", "notify-login-failed");
+        el.innerText = "Could not get token:";
+        translateElement(el);
+        el.innerText += ' ' + text;
     } else {
         let token = JSON.parse(await res.text()).token;
         tools.set_auth_info_from_token(token);
+        el.setAttribute("data-i18n-key", "notify-login-success");
         el.innerText = "Token exchange succesful";
+        translateElement(el);
         let state = tools.url2dict(location.hash);
         location.replace(state.page || "./app/");
     }
@@ -59,18 +63,21 @@ async function load() {
 window.addEventListener('load', load);
 </script>
 
-<input id='input_u' type='text' placeholder='username' style='margin:4px;'/><br />
-<input id='input_p' type='password' placeholder='password' style='margin:4px;'/><br />
-<button id='submit_up' class='whitebutton' style='margin:4px;' >Submit</button>
+<input id='input_u' type='text' data-i18n-key="placeholder-username" placeholder='username' style='margin:4px;'/><br />
+<input id='input_p' type='password' data-i18n-key="placeholder-password" placeholder='password' style='margin:4px;'/><br />
+<button id='submit_up' class='whitebutton' style='margin:4px;' data-i18n-key="btn-submit">
+    Submit
+</button>
 
 <br />
-<button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' >Login as default user (on localhost)</button>
+<button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' data-i18n-key="login-as-localhost" >Login as default user (on localhost)</button>
 
 <br/>
 
 <select data-i18n-switcher class="locale-switcher">
     <option value="en">English</option>
     <option value="ru">Russian (Русский)</option>
+    <option value="tr">Turkish (Türkçe)</option>
 </select>
 
 <p id='result'></p>

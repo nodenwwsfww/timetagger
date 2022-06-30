@@ -1,6 +1,8 @@
 % TimeTagger - App
 % The TimeTagger application.
 
+<script src='./locale.js'></script>
+
 <script>
 
 window.addEventListener("load", function() {
@@ -82,3 +84,6 @@ function register_service_worker() {
 </script>
 
 <canvas id='canvas'>This page needs a working (HTML5) canvas.</canvas>
+
+<select data-i18n-switcher class="locale-switcher">
+</select>

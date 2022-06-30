@@ -1,6 +1,7 @@
 # Logout
 
 <script src='./app/tools.js'></script>
+<script src='./app/locale.js'></script>
 
 <script>
 
@@ -14,4 +15,4 @@ async function logout() {
 window.addEventListener('load', logout);
 </script>
 
-Logging out ...
+<p data-i18n-key="notify-logging-out">Logging out ...</p>

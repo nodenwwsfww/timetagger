@@ -1,43 +1,139 @@
 // The lang our app first shows
-
 const localesData = {
   "ru": {
-    "app-title": "تطبيقي المطبق",
-    "lead": "أهلاً بك في مكاني الصغير على النت يا {username}.",
-    "home": "الرئيسية",
-    "about": "نبذة عنا",
-    "article-plural": {
-      "zero": "لا توجد مقالات",
-      "one": "مقال {count}",
-      "two": "مقالان",
-      "few": "{count} مقالات",
-      "many": "{count} مقال",
-      "other": "{count} مقال"
-    },
+    "btn-submit": "Подтвердить",
+    "btn-refresh": "Обновить",
+    "btn-login": "Авторизоваться",
+    "btn-logout": "Выйти",
+    "btn-logout-all": "Выход всех остальных устройств",
+    "btn-rest-api-token": "Сбросить токен API",
+    "placeholder-username": "имя пользователя",
+    "placeholder-password": "пароль",
+    "menubar-home": "Главная",
+    "menubar-account": "Аккаунт",
+    "login-as-localhost": "Войдите в качестве пользователя по умолчанию (на Localhost)",
+    "header-login": "Войти",
+    "header-account": "Аккаунт",
+    "header-auth-status": "Статус аутентификации",
+    "get-auth-status": "Получение статуса входа ...",
+    "header-api-token": "Токен API",
+    "get-api-token": "Получение токена API ...",
+    "web-token-summary": "Детали веб-токена",
+    "web-token-details": "Аутентификация происходит с использованием веб-токена, который получается при входе в систему. \n     Токен действителен в течение 14 дней и обновляется при использовании приложения. \n     Рекомендуется выйти из устройств, которые у вас нет. В случае, если вы забудете, \n     или когда устройство потеряно/украдено, семена токена могут быть сброшены, что приводит к выходу из всех остальных сеансов.",
+    "api-token-summary": "Детали веб-токена",
+    "api-token-details": "Токен API обеспечивает доступ к серверу для трехмерных приложений (например, инструмент CLI). Жетоны API не истекают. \n     Сбросьте токен, чтобы отозвать доступ для всех приложений, используя текущий токен API.",
+    "login-status": "не авторизован(а)",
+    "notify-login-success": "Обмен токенов прошел успешно",
+    "notify-login-failed": "Не удалось получить токен:",
+    "notify-logged-as": "Авторизован(а) как ",
+    "notify-not-available": "Не доступно.",
+    "notify-reset-web-token": "Сброс веб токена ...",
+    "notify-logging-out": "Выходим ...",
+    "external-pages": "External pages",
+    "homepage": "Homepage",
+    "manage": "Manage",
+    "search-records": "Search records and tags",
+    "import-records": "Import records",
+    "export-all-records": "Export all records",
+    "account": "Account",
+    "user": "User",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "install-this-app": "<b>Install this app</b>"
   },
 
   "en": {
-    "app-title": "My Appy Apperson",
-      "lead": "Welcome to my little spot on the interwebs, {username}!",
-      "home": "Home",
-      "about": "About",
-      "article-plural": {
-    "one": "{count} article and counting",
-        "other": "{count} articles and counting"
-  },
+    "btn-submit": "Submit",
+    "btn-refresh": "Refresh",
+    "btn-login": "Log in",
+    "btn-logout": "Log out",
+    "btn-logout-all": "Logout all other devices",
+    "btn-rest-api-token": "Reset API token",
+    "placeholder-username": "username",
+    "placeholder-password": "password",
+    "menubar-home": "Home",
+    "menubar-account": "Account",
+    "login-as-localhost": "Login as default user (on localhost)",
+    "header-login": "Login",
+    "header-account": "Account",
+    "header-auth-status": "Authentication status",
+    "get-auth-status": "Getting auth status ...",
+    "header-api-token": "API toke",
+    "get-api-token": "Getting API token ...",
+    "web-token-summary": "web-token details",
+    "web-token-details": "Authentication occurs using a web-token that is obtained when logging in.\n" +
+        "    The token is valid for 14 days, and is refreshed when you use the application.\n" +
+        "    It is recommended to log out on devices that you do not own. In case you forget,\n" +
+        "    or when a device is lost/stolen, the token seed can be reset, causing all other sessions to log out.",
+    "api-token-summary": "web-token details",
+    "api-token-details": "The API token enables access to the server for 3d party applications (e.g. the CLI tool). API tokens do not expire.\n" +
+        "    Reset the token to revoke access for all applications using the current API token.",
+    "login-status": "not-logged-in",
+    "about": "About",
+    "article-plural": {
+      "one": "{count} article and counting",
+      "other": "{count} articles and counting"
+    },
     "nyan-cat-price": "Nyan Cat (Official) NFT: {price}",
-      "publish-date": "Published {publishDate}"
-  }
+    "publish-date": "Published {publishDate}",
+    "notify-login-success": "Token exchange succesful",
+    "notify-login-failed": "Could not get token:",
+    "notify-logged-as": "Logged in as <b>",
+    "notify-not-available": "Not available.",
+    "notify-reset-web-token": "Resetting web token seed ...",
+    "notify-logging-out": "Logging out ...",
+    "you-are-logged-out": "You are logged out.",
+    "external-pages": "External pages",
+    "homepage": "Homepage",
+    "manage": "Manage",
+    "search-records": "Search records and tags",
+    "import-records": "Import records",
+    "export-all-records": "Export all records",
+    "account": "Account",
+    "user": "User",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "install-this-app": "<b>Install this app</b>"
 
+  },
+  "tr": {
+    "btn-submit": "Göndermek",
+    "btn-refresh": "Yenilemek",
+    "btn-login": "Giriş yapmak",
+    "btn-logout": "Çıkış Yap",
+    "btn-logout-all": "Diğer tüm cihazları oturum açın",
+    "btn-rest-api-token": "API jetonunu sıfırla",
+    "placeholder-username": "Kullanıcı adı",
+    "placeholder-password": "şifre",
+    "menubar-home": "Ev",
+    "menubar-account": "Hesap",
+    "login-as-localhost": "Varsayılan kullanıcı olarak giriş yapın (LocalHost'ta)",
+    "header-login": "Giriş yapmak",
+    "header-account": "Hesap",
+    "header-auth-status": "Kimlik Doğrulama Durumu",
+    "get-auth-status": "Auth Durum Almak ...",
+    "header-api-token": "API jetonu",
+    "get-api-token": "API jetonunu almak ...",
+    "web-token-summary": "Web-Token Ayrıntıları",
+    "web-token-details": "Kimlik doğrulama, giriş yaparken elde edilen bir web-token kullanılarak gerçekleşir. \n     Jeton 14 gün boyunca geçerlidir ve uygulamayı kullandığınızda yenilenir. \n     Sahip olmadığınız cihazlarda oturum açmanız önerilir. Unutursan \n     Veya bir cihaz kaybolduğunda/çalındığında, jeton tohumu sıfırlanabilir ve diğer tüm oturumların çıkış yapmasına neden olabilir.",
+    "api-token-summary": "Web-Token Ayrıntıları",
+    "api-token-details": "API jetonu, 3D taraf uygulamaları için sunucuya erişim sağlar (örn. CLI aracı). API jetonlarının süresi dolmaz. \n     Geçerli API jetonunu kullanarak tüm uygulamalar için erişimi iptal etmek için jeton sıfırlayın.",
+    "login-status": "Giriş yapmadınız",
+    "about": "Hakkında",
+  }
 };
 
+window.localesData = localesData;
 
-const defaultLocale = "en";
-const supportedLocales = ["en", "ru"];
+const defaultLocale = "en"
+const supportedLocales = ["en", "ru", "tr"];
 
 const fullyQualifiedLocaleDefaults = {
   en: "en-US",
   ru: "ru-RU",
+  tr: "tr-TR"
 };
 
 // The active lang
@@ -46,15 +142,33 @@ let locale;
 // Gets filled with active lang translations
 let translations = {};
 
+function tryTranslateAppCanvas() {
+  console.log('test')
+  if (!window.location.href.includes('app')) return;
+  const canvas = document.getElementById('canvas')
+  if (canvas) console.dir(canvas);
+
+}
+
 // When the page content is ready...
 document.addEventListener("DOMContentLoaded", () => {
+
+  let mayLanguage = (navigator.language || navigator.userLanguage).slice(0, 2);
+
   const initialLocale = supportedOrDefault(
     browserLocales(true),
   );
 
-  setLocale(initialLocale);
+  if (!mayLanguage) mayLanguage = initialLocale;
 
-  bindLocaleSwitcher(initialLocale);
+  const curLocale = localStorage.getItem("locale");
+  const finalLocale = curLocale ? curLocale : mayLanguage;
+
+  setLocale(finalLocale);
+  bindLocaleSwitcher(finalLocale);
+  // Костыли (проганье на питоне и на js даёт о себе знать (удобства)
+  tryTranslateAppCanvas();
+
 });
 
 // Load translations for the given lang and translate
@@ -65,11 +179,15 @@ async function setLocale(newLocale) {
   const newTranslations = localesData[newLocale];
 
   locale = newLocale;
+  window.locale = locale;
+
   translations = newTranslations;
   document.documentElement.lang = newLocale;
   document.documentElement.dir = dir(newLocale);
 
   translatePage();
+  console.log('saved', newLocale);
+  localStorage.setItem("locale", newLocale);
 }
 
 // Retrieves translations JSON object for the given
@@ -98,6 +216,7 @@ function translateElement(element) {
     JSON.parse(element.getAttribute("data-i18n-opt")) || {};
 
   element.innerText = translate(key, options);
+  if (element.placeholder && !element.innerText) element.placeholder = translate(key, options);
 }
 
 function translate(key, interpolations = {}) {

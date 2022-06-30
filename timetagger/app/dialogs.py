@@ -297,11 +297,26 @@ class NotificationDialog(BaseDialog):
         super().open(None)
 
 
+
 class MenuDialog(BaseDialog):
     """Dialog to show a popup menu."""
 
     EXIT_ON_CLICK_OUTSIDE = True
     TRANSPARENT_BG = True
+
+    localesData = {
+        "ru": {},
+        "en": {
+            "external-pages": "External pages",
+            "homepage": "Homepage"
+        },
+        "tr": {}
+    }
+
+    def updateLocales():
+        if window.localesData:
+            for key in self.localesData:
+                self.localesData[key] = window.localesData[key]
 
     def open(self):
         """Show/open the dialog ."""
@@ -337,16 +352,17 @@ class MenuDialog(BaseDialog):
         loggedinas.innerText = text
 
         container = self.maindiv
+        self.updateLocales()
         for icon, show, title, func in [
             (None, True, "External pages", None),
-            ("\uf015", True, "Homepage", "/timetagger/app/"),
+            ("\uf015", True, self.localesData[window.locale]["homepage"], "/timetagger/app/"),
             (None, store_valid, "Manage", None),
             ("\uf002", store_valid, "Search records and tags", self._search),
             ("\uf56f", store_valid, "Import records", self._import),
             ("\uf56e", store_valid, "Export all records", self._export),
             (None, True, "User", None),
             ("\uf013", store_valid, "Settings", self._show_settings),
-            ("\uf2bd", True, "Account", "../account"),
+            ("\uf2bd", True, self.localesData[window.locale]["account"], "../account"),
             ("\uf2f6", not logged_in, "Login", "../login"),
             ("\uf2f5", logged_in, "Logout", "../logout"),
             (None, is_installable, None, None),
@@ -358,6 +374,7 @@ class MenuDialog(BaseDialog):
                 # Divider
                 el = document.createElement("div")
                 el.setAttribute("class", "divider")
+                el.setAttribute("data-i18n-key", "external-pages")
                 if title is not None:
                     el.innerHTML = title
                 container.appendChild(el)
