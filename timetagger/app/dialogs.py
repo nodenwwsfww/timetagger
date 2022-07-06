@@ -347,7 +347,9 @@ class MenuDialog(BaseDialog):
         if window.store.get_auth:
             auth = window.store.get_auth()
             if auth:
-                text = "Signed in as " + auth.username
+                text = "Signed in as "
+                text = self.localesData[window.locale]["signed-in-as"] + " "
+                text += auth.username
             else:
                 text = "Not signed in"
                 text = self.localesData[window.locale]["login-status"]
