@@ -37,7 +37,7 @@ const localesData = {
     "notify-not-available": "Нет в наличии.",
     "notify-reset-web-token": "Сброс семян веб -токена ...",
     "notify-logging-out": "Выходить из строя ...",
-    "you-are-logged-out": "Вы зарегистрированы.",
+    "you-are-logged-out": "Вы не авторизованы.",
     "external-pages": "Внешние страницы",
     "homepage": "Домашняя страница",
     "manage": "Управлять",
