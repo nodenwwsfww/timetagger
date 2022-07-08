@@ -15,4 +15,11 @@ async function logout() {
 window.addEventListener('load', logout);
 </script>
 
+<select data-i18n-switcher class="locale-switcher">
+    <option value="en">English</option>
+    <option value="ru">Russian (Русский)</option>
+    <option value="tr">Turkish (Türkçe)</option>
+</select>
+
 <p data-i18n-key="notify-logging-out">Logging out ...</p>
+

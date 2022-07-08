@@ -3,9 +3,10 @@ const localesData = {
   "ru": {
     "btn-submit": "Представлять на рассмотрение",
     "btn-refresh": "Обновлять",
-    "btn-login": "Авторизоваться",
+    "btn-login": "Авторизация",
     "btn-logout": "Выйти",
     "btn-logout-all": "Выход всех остальных устройств",
+    "btn-register": "Регистрация",
     "btn-rest-api-token": "Сбросить токен API",
     "placeholder-username": "имя пользователя",
     "placeholder-password": "пароль",
@@ -50,7 +51,8 @@ const localesData = {
     "login": "Авторизоваться",
     "logout": "Выйти",
     "install-this-app": "<b> Установите это приложение </b>",
-    "timeline": "График"
+    "timeline": "График",
+    "login-as-default": "Быстрый вход как стандартный пользователь"
   },
 
   "en": {
@@ -59,6 +61,7 @@ const localesData = {
     "btn-login": "Log in",
     "btn-logout": "Log out",
     "btn-logout-all": "Logout all other devices",
+    "btn-register": "Register",
     "btn-rest-api-token": "Reset API token",
     "placeholder-username": "username",
     "placeholder-password": "password",
@@ -107,7 +110,8 @@ const localesData = {
     "login": "Login",
     "logout": "Logout",
     "install-this-app": "<b>Install this app</b>",
-    "timeline": "Timeline"
+    "timeline": "Timeline",
+    "login-as-default": "Just Login as default user"
 
   },
   "tr": {
@@ -116,6 +120,7 @@ const localesData = {
     "btn-login": "Giriş yapmak",
     "btn-logout": "Çıkış Yap",
     "btn-logout-all": "Diğer tüm cihazları oturum açın",
+    "btn-register": "Kayıt Olun",
     "btn-rest-api-token": "API jetonunu sıfırla",
     "placeholder-username": "Kullanıcı adı",
     "placeholder-password": "şifre",
@@ -160,7 +165,8 @@ const localesData = {
     "login": "Giriş yapmak",
     "logout": "Çıkış Yap",
     "install-this-app": "<b> Bu uygulamayı yükleyin </b>",
-    "timeline": "Zaman çizelgesi"
+    "timeline": "Zaman çizelgesi",
+    "login-as-default": "Hızlı giriş"
   }
 };
 

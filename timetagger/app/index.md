@@ -1,5 +1,4 @@
-% TimeTagger - App
-% The TimeTagger application.
+% TimeTagger
 
 <script src='./locale.js'></script>
 

@@ -133,6 +133,8 @@ async def get_webtoken(request):
         return await get_webtoken_localhost(request, auth_info)
     elif method == "usernamepassword":
         return await get_webtoken_usernamepassword(request, auth_info)
+    elif method == "login_default":
+        return await get_webtoken_default(request, auth_info)
     else:
         return 401, {}, f"Invalid authentication method: {method}"
 
@@ -170,6 +172,13 @@ async def get_webtoken_localhost(request, auth_info):
     token = await get_webtoken_unsafe("defaultuser")
     return 200, {}, dict(token=token)
 
+async def get_webtoken_default(request, auth_info):
+    """An authentication handler that provides a webtoken default. See `get_webtoken_unsafe()` for details.
+    """
+    
+    # Return the webtoken for the default user
+    token = await get_webtoken_unsafe("defaultuser")
+    return 200, {}, dict(token=token)
 
 def load_credentials():
     d = {}

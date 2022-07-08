@@ -4,7 +4,6 @@
 <script src='./app/locale.js'></script>
 <script>
 async function login(payload) {
-
     // Reset status
     let el = document.getElementById("result");
     el.innerHTML = "Logging in ..."
@@ -13,7 +12,7 @@ async function login(payload) {
     // The body is obfuscated with base64, but not encrypted.
     let body = btoa(JSON.stringify(payload));
 
-    // Do request
+    // Do request   
     let url = tools.build_api_url("bootstrap_authentication");
     let init = {method: "POST", headers: {}, body: body};
     let res = await fetch(url, init);
@@ -40,6 +39,10 @@ async function login_localhost() {
     await login({"method": "localhost"});
 }
 
+async function login_default() {
+        await login({"method": "login_default"});
+}
+
 async function login_credentials() {
     let input_u = document.getElementById("input_u");
     let input_p = document.getElementById("input_p");
@@ -51,9 +54,14 @@ async function load() {
     let but2 = document.getElementById("submit_localhost");
     let input_p = document.getElementById("input_p");
 
+    const buttonLoginAsDefault = document.getElementById("submit_login_default");
+
     but1.onclick = login_credentials;
     but2.onclick = login_localhost;
+    buttonLoginAsDefault.onclick = login_default;
+
     input_p.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
+
 
     if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
         but2.style.display = "block";
@@ -70,6 +78,8 @@ window.addEventListener('load', load);
 </button>
 
 <br />
+
+<button id='submit_login_default' class='whitebutton' style='margin:4px;' data-i18n-key="login-as-default">Just Login as default user</button>
 <button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' data-i18n-key="login-as-localhost" >Login as default user (on localhost)</button>
 
 <br/>
