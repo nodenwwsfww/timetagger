@@ -57,6 +57,10 @@ def updateLocales():
         for key in localesData:
             localesData[key] = window.localesData[key]
 
+def getLocalizedData(dataKey):
+    updateLocales()
+    return localesData[window.locale][dataKey]
+    
 def init_module():
     set_width_mode()
     set_colors()
@@ -998,7 +1002,7 @@ class TopWidget(Widget):
                 ha,
                 "fas-\uf077",
                 "nav_backward",
-                "Step backward [↑/pageUp]",
+                getLocalizedData("action-step-backward"),
                 {"ref": "bottomcenter"},
             )
             updown_w = self._draw_button(
@@ -1009,7 +1013,7 @@ class TopWidget(Widget):
                 ha,
                 "fas-\uf078",
                 "nav_forward",
-                "Step forward [↓/pageDown]",
+                getLocalizedData("action-step-forward"),
                 {"ref": "topcenter"},
             )
 
@@ -1027,7 +1031,7 @@ class TopWidget(Widget):
                 h,
                 "fas-\uf010",
                 "nav_zoom_" + self._current_scale["out"],
-                "Zoom out [←]",
+                getLocalizedData("action-zoom-out"),
                 {"ref": "ropright"},
             )
             x -= zoom_w + 5
@@ -1042,9 +1046,9 @@ class TopWidget(Widget):
             y3,
             None,
             h,
-            "Today",
+            getLocalizedData("today"),
             "nav_snap_now1D",  # "nav_snap_now" + now_scale,
-            "Snap to now [d]",  # "Snap to now [Home]",
+            getLocalizedData("action-snap"), # "Snap to now [Home]",
             {"ref": "topright", "color": now_clr, "font": FONT.condensed},
         )
 
@@ -1056,7 +1060,7 @@ class TopWidget(Widget):
             h,
             "fas-\uf0d7",  # ["fas-\uf073", "fas-\uf0d7"],
             "nav_menu",
-            "Select time range [t]",
+            getLocalizedData("action-select-time-range"),
             {"ref": "topright"},
         )
 
@@ -1077,7 +1081,7 @@ class TopWidget(Widget):
                 h,
                 "fas-\uf00e",
                 "nav_zoom_" + self._current_scale["in"],
-                "Zoom in [→]",
+                getLocalizedData("action-zoom-in"),
                 {"ref": "ropleft"},
             )
         x += zoom_w + margin
@@ -1088,9 +1092,9 @@ class TopWidget(Widget):
             y3,
             None,
             h,
-            ["fas-\uf15c", "Report"],
+            ["fas-\uf15c", getLocalizedData("report")],
             "report",
-            "Show report [r]",
+            getLocalizedData("action-show-report"),
             {"ref": "topleft", "font": FONT.condensed},
         )
 
@@ -1208,8 +1212,8 @@ class TopWidget(Widget):
 
         now = self._canvas.now()
 
-        start_tt = "Start recording [s]"
-        stop_tt = "Stop recording [x]"
+        start_tt = getLocalizedData("action-start-recording")
+        stop_tt = getLocalizedData("action-stop-recording")
 
         # Define stop summary
         running_summary = ""
@@ -1264,7 +1268,7 @@ class TopWidget(Widget):
                 y,
                 None,
                 h,
-                ["fas-\uf04b", "Record"],
+                ["fas-\uf04b", getLocalizedData("record")],
                 "record_start",
                 start_tt,
                 {"ref": "topright", "font": FONT.condensed},
@@ -2948,7 +2952,7 @@ class AnalyticsWidget(Widget):
             ctx.textBaseline = "middle"
             ctx.fillStyle = COLORS.tick_text if hover else COLORS.prim1_clr
             ctx.font = FONT.size + "px " + FONT.default
-            for i, c in enumerate("Overview"):
+            for i, c in enumerate(getLocalizedData["overview"]):
                 ctx.fillText(c, (x3 + x4) / 2, (y3 + y4) / 2 + (i - 4) * 18)
             return
 
@@ -2975,6 +2979,7 @@ class AnalyticsWidget(Widget):
         # Draw title text
         if self._canvas.w > 700:
             text1 = "Overview"
+            text1 = getLocalizedData("overview")
             ctx.textAlign = "right"
             ctx.textBaseline = "top"
             ctx.font = "bold " + (FONT.size * 1.4) + "px " + FONT.mono
@@ -2993,7 +2998,7 @@ class AnalyticsWidget(Widget):
                 ctx.font = FONT.size + "px " + FONT.default
                 ctx.textBaseline = "top"
                 ctx.fillStyle = COLORS.prim1_clr
-                text = "Click the ▶ button to start tracking!"
+                text = getLocalizedData("action-start-tracking")
                 ctx.fillText(text, x1 + 5, y1 + self._npixels_each + 25)
 
     def _draw_stats(self, ctx, x1, y1, x2, y2):
@@ -3212,7 +3217,7 @@ class AnalyticsWidget(Widget):
             ctx.font = FONT.size + "px " + FONT.default
             ctx.fillStyle = COLORS.record_text
             ctx.textAlign = "left"
-            ctx.fillText("Total", tx, ty)
+            ctx.fillText(getLocalizedData("total"), tx, ty)
             ctx.textAlign = "right"
             ctx.fillText(duration, x_ref_duration, ty)
         else:

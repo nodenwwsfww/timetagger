@@ -5,7 +5,6 @@ PScript implementation of datetime utilities.
 from pscript import this_is_js, RawJS
 from pscript.stubs import Date, isNaN, Math
 
-
 DAYS_SHORT = [
     "Sun",
     "Mon",
@@ -54,6 +53,9 @@ MONTHS_LONG = [
     "December",
 ]
 
+def getLocalizedData(dataKey):
+    currentLocale = window.locale
+    return window.localesData[currentLocale][dataKey]
 
 def now():
     """Get the current time in seconds, as a float."""
@@ -274,17 +276,18 @@ def get_year_month_day(t):
 
 def get_month_shortname(t):
     d = Date(t * 1000)
-    return MONTHS_SHORT[d.getMonth()]
+    return getLocalizedData("MONTHS_SHORT")[d.getMonth()]
 
 
 def get_weekday_shortname(t):
     d = Date(t * 1000)
-    return DAYS_SHORT[d.getDay()]  # getDay starts at zero, which represents Sunday
+
+    return getLocalizedData("DAYS_SHORT")[d.getDay()]  # getDay starts at zero, which represents Sunday
 
 
 def get_weekday_longname(t):
     d = Date(t * 1000)
-    return DAYS_LONG[d.getDay()]
+    return getLocalizedData("DAYS_LONG")[d.getDay()]
 
 
 def is_first_day_of_week(t):
