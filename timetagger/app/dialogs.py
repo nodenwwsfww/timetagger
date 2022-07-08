@@ -14,6 +14,9 @@ from pscript.stubs import (
     Notification,
 )
 
+def getLocalizedData(dataKey):
+    currentLocale = window.locale
+    return window.localesData[currentLocale][dataKey]
 
 if this_is_js():
     tools = window.tools
@@ -3403,6 +3406,7 @@ class SettingsDialog(BaseDialog):
             "T": "Select time range",
             "R": "Open report dialog",
         }
+        shortcuts = getLocalizedData("shortcuts")
         shortcuts_html = ""
         for key, expl in shortcuts.items():
             if key.startswith("_"):
@@ -3410,39 +3414,39 @@ class SettingsDialog(BaseDialog):
             shortcuts_html += f"<div class='monospace'>{key}</div><div>{expl}</div>"
 
         html = f"""
-            <h1><i class='fas'>\uf013</i>&nbsp;&nbsp;Settings
+            <h1><i class='fas'>\uf013</i>&nbsp;&nbsp;{getLocalizedData("settings")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
             </h1>
-            <center style='font-size:80%'>Settings for this device</center>
-            <h2><i class='fas'>\uf3fa</i>&nbsp;&nbsp;Appearance</h2>
+            <center style='font-size:80%'>{getLocalizedData("settings-for-device")}</center>
+            <h2><i class='fas'>\uf3fa</i>&nbsp;&nbsp;{getLocalizedData("appearance")}</h2>
             <div class='formlayout'>
-                <div>Light / dark:</div>
+                <div>{getLocalizedData("light-dark")}:</div>
                 <select>
-                    <option value=0>Auto detect</option>
-                    <option value=1>Light mode</option>
-                    <option value=2>Dark mode</option>
+                    <option value=0>{getLocalizedData("auto-detect")}</option>
+                    <option value=1>{getLocalizedData("light-mode")}</option>
+                    <option value=2>{getLocalizedData("dark-mode")}</option>
                 </select>
-                <div>Width:</div>
+                <div>{getLocalizedData("width")}:</div>
                 <select>
-                    <option value='auto'>Auto scale</option>
-                    <option value='1000'>Max 1000px</option>
-                    <option value='1500'>Max 1500px</option>
-                    <option value='full'>Full width</option>
+                    <option value='auto'>{getLocalizedData("auto-scale")}</option>
+                    <option value='1000'>{getLocalizedData("max")} 1000px</option>
+                    <option value='1500'>{getLocalizedData("max")} 1500px</option>
+                    <option value='full'>{getLocalizedData("full-width")}</option>
                 </select>
             </div>
-            <h2><i class='fas'>\uf2f2</i>&nbsp;&nbsp;Pomodoro</h2>
+            <h2><i class='fas'>\uf2f2</i>&nbsp;&nbsp;{getLocalizedData("pomodoro")}</h2>
             <label>
                 <input type='checkbox' checked='false'></input>
-                Enable pomodoro (experimental) </label>
-            <h2><i class='fas'>\uf085</i>&nbsp;&nbsp;Misc</h2>
+                {getLocalizedData("enable-pomodoro")} </label>
+            <h2><i class='fas'>\uf085</i>&nbsp;&nbsp;{getLocalizedData("misc")}</h2>
             <label>
                 <input type='checkbox' checked='true'></input>
-                Show elapsed time below start-button</label>
+                {getLocalizedData("show-elapsed-time")}</label>
             <hr style='margin-top: 1em;' />
-            <center style='font-size:80%'>Other settings</center>
-            <h2><i class='fas'>\uf4fd</i>&nbsp;&nbsp;Time zone</h2>
+            <center style='font-size:80%'>{getLocalizedData("other-settings")}</center>
+            <h2><i class='fas'>\uf4fd</i>&nbsp;&nbsp;{getLocalizedData("time-zone")}</h2>
             <div></div>
-            <h2><i class='fas'>\uf11c</i>&nbsp;&nbsp;Keyboard shortcuts</h2>
+            <h2><i class='fas'>\uf11c</i>&nbsp;&nbsp;{getLocalizedData("keyboard-shortcuts")}</h2>
             <div class='formlayout'>{shortcuts_html}</div>
             <br /><br />
             """
