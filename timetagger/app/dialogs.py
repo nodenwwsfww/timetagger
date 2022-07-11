@@ -458,22 +458,13 @@ class TimeSelectionDialog(BaseDialog):
             <div></div>
             <div style='min-height: 6px;'></div>
             <div class='grid5'>
-                <a>today <span class='keyhint'>d</span></a>
-                <a>this week <span class='keyhint'>w</span></a>
-                <a>this month <span class='keyhint'>m</span></a>
-                <a>this quarter</a>
-                <a>this year</a>
-                <a>yester<wbr>day</a>
-                <a>last week</a>
-                <a>last month</a>
-                <a>last quarter</a>
-                <a>last year</a>
+                {getLocalizedData("select-date-html")}
             </div>
             <div style='min-height: 10px;'></div>
             <div class='menu'>
-                <div style='flex: 0.5 0.5 auto; text-align: right;'>From:&nbsp;&nbsp;</div>
+                <div style='flex: 0.5 0.5 auto; text-align: right;'>{getLocalizedData("from")}:&nbsp;&nbsp;</div>
                 <input type="date" step="1" />
-                <div style='flex: 0.5 0.5 auto; text-align: right;'>To:&nbsp;&nbsp;</div>
+                <div style='flex: 0.5 0.5 auto; text-align: right;'>{getLocalizedData("to")}:&nbsp;&nbsp;</div>
                 <input type="date" step="1" />
                 <div style='flex: 0.5 0.5 auto;'></div>
             </div>
@@ -569,13 +560,13 @@ class StartStopEdit:
         self.initial_t1, self.initial_t2 = t1, t2  # even more original than ori_t1 :)
 
         if self.initialmode in ("start", "new"):
-            text_startnow = "Start now"
-            text_startrlr = "Started earlier"
-            text_finished = "Already done"
+            text_startnow = getLocalizedData("start-now")
+            text_startrlr = getLocalizedData("start-earlier")
+            text_finished = getLocalizedData("already-done")
         else:
-            text_startnow = "Start now"  # not visible
-            text_startrlr = "Still running"
-            text_finished = "Stopped"
+            text_startnow = getLocalizedData("start-now")  # not visible
+            text_startrlr = getLocalizedData("still-running")
+            text_finished = getLocalizedData("stopped")
 
         self.node.innerHTML = f"""
         <div>
@@ -1025,7 +1016,7 @@ class Autocompleter:
         if show_presets:
             # Suggestions from presets
             for preset in self._get_suggested_tags_presets():
-                html = preset + "<span class='meta'>preset<span>"
+                html = preset + f"""<span class='meta'>{getLocalizedData("preset")}<span>"""
                 i = preset.indexOf(needle)
                 if i > 0:
                     if preset[i - 1] == "#":
@@ -1037,7 +1028,7 @@ class Autocompleter:
                             + "</b>"
                             + preset[i + needle.length :]
                         )
-                        html += "<span class='meta'>preset<span>"
+                        html += f"""<span class='meta'>{getLocalizedData("preset")}<span>"""
                         matches1.push((preset, html))
                     elif needle.length >= 2:
                         # The preset contains the needle, and the needle is more than 1 char
@@ -1048,7 +1039,7 @@ class Autocompleter:
                             + "</b>"
                             + preset[i + needle.length :]
                         )
-                        html += "<span class='meta'>preset<span>"
+                        html += f"""<span class='meta'>{getLocalizedData("preset")}<span>"""
                         matches2.push((preset, html))
         else:
             # Suggestions from recent tags
@@ -1096,7 +1087,7 @@ class Autocompleter:
         if presets:
             types.push("Presets")
             for preset in self._get_suggested_tags_presets():
-                html = preset + "<span class='meta'>preset<span>"
+                html = preset + f"""<span class='meta'>{getLocalizedData("preset")}<span>"""
                 suggestions.push((preset, html))
         # Collect recents
         if recents:
@@ -1166,7 +1157,7 @@ class Autocompleter:
         # Add title
         hint_html = ""
         if self._mode_mask & 3 and self._mode_mask & 4:
-            hint = "(type '#' to toggle recents / presets)"
+            hint = getLocalizedData("type-to-toggle-recents")
             hint_html = "<span style='color:#999;'>" + hint + "</span>"
         item = document.createElement("div")
         item.classList.add("meta")
@@ -1439,7 +1430,7 @@ class RecordDialog(BaseDialog):
 
     def _set_mode(self, mode):
         self._lmode = lmode = mode.lower()
-        self._title_div.innerText = f"{mode} {getLocalizedData('record-small')}"
+        self._title_div.innerText = f"{getLocalizedData(lmode)} {getLocalizedData('record-small')}"
         is_running = self._record.t1 == self._record.t2
         # has_running = len(window.store.records.get_running_records()) > 0
         # Set description placeholder
@@ -1908,15 +1899,11 @@ class TagPresetsDialog(BaseDialog):
 
     def open(self, callback=None):
         self.maindiv.innerHTML = f"""
-            <h1><i class='fas'>\uf044</i>&nbsp;&nbsp;Tag presets
+            <h1><i class='fas'>\uf044</i>&nbsp;&nbsp;{getLocalizedData("tag-presets")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
             </h1>
-            <p>
-            Use the text field below to define tag presets, one per line.
-            Each line may contain one or more tags.
-            You can also drag-and-drop a text file with presets.
-            </p>
-            <button type='button'>Check & Save</button>
+            <p>{getLocalizedData("tag-span")}</p>
+            <button type='button'>{getLocalizedData("check-and-save")}</button>
             <div></div>
             <textarea rows='12'
                 style='background: #fff; display: block; margin: 0.5em; width: calc(100% - 1.5em);'>
@@ -1997,7 +1984,7 @@ class TagPresetsDialog(BaseDialog):
     def do_apply(self):
         """Normalize tags"""
         # Process
-        self._analysis_out.innerHTML = "Processing ..."
+        self._analysis_out.innerHTML = getLocalizedData("processing")
         lines1 = self._input_element.value.lstrip().splitlines()
         lines2 = []
         found_tags = {}
@@ -2057,18 +2044,18 @@ class TagRenameDialog(BaseDialog):
             tagword = "tags"
 
         self.maindiv.innerHTML = f"""
-            <h1><i class='fas'>\uf02b</i>&nbsp;&nbsp;Rename {tagword}
+            <h1><i class='fas'>\uf02b</i>&nbsp;&nbsp;{getLocalizedData("btn-rename")} {tagword}
                 <button type='button'><i class='fas'>\uf00d</i></button>
                 </h1>
             <div class='formlayout'>
                 <div>{title}:</div>
                 <div>{tagz}</div>
-                <div>New tag(s):</div>
+                <div>{getLocalizedData("new-tags")}</div>
                 <input type='text' spellcheck='false' />
                 <div></div>
-                <button type='button'>Prepare renaming ...</button>
+                <button type='button'>{getLocalizedData("prepare-renaming")}</button>
                 <div></div>
-                <button type='button'>Confirm</button>
+                <button type='button'>{getLocalizedData("btn-confirm")}</button>
             </div>
             <div style='margin-top:2em;'></div>
         """
@@ -2104,7 +2091,7 @@ class TagRenameDialog(BaseDialog):
     def _hide_confirm_button(self):
         self._button_replace_comfirm.disabled = True
         self._button_replace_comfirm.style.visibility = "hidden"
-        self._button_replace_comfirm.innerText = "Confirm"
+        self._button_replace_comfirm.innerText = getLocalizedData("btn-confirm")
 
     def _on_name2_done(self):
         raw_parts = self._tagname2.value.split(" ")
@@ -2143,11 +2130,11 @@ class TagRenameDialog(BaseDialog):
 
     def _replace_all(self):
         self._find_records()
-        tagword = "tag" if len(self._tags1) == 1 else "tags"
+        tagword = getLocalizedData("tag") if len(self._tags1) == 1 else getLocalizedData("tags")
 
         n = len(self._records)
         if n == 0:
-            text = f"No records found"
+            text = getLocalizedData("no-records-found")
             disabled = True
         elif len(self._tags2):
             text = f"Confirm replacing {tagword} in {n} records"
@@ -2192,7 +2179,7 @@ class TagRenameDialog(BaseDialog):
             window.store.settings.set_tag_info(tag2, info)
 
         # Feedback
-        self._button_replace_comfirm.innerText = "Done"
+        self._button_replace_comfirm.innerText = getLocalizedData("done")
         self._button_replace_comfirm.disabled = True
         window.setTimeout(self._hide_confirm_button, 500)
 
@@ -2418,32 +2405,32 @@ class ReportDialog(BaseDialog):
             filtertext = self._tags.join(" ")
         else:
             filtertext = (
-                "<small>(select tags in the overview panel to filter by them)</small>"
+                f"""<small>{getLocalizedData("report-select-tags-span")}</small>"""
             )
-        self._copybuttext = "Copy table"
+        self._copybuttext = getLocalizedData("report-copy-table")
         html = f"""
-            <h1><i class='fas'>\uf15c</i>&nbsp;&nbsp;Report
+            <h1><i class='fas'>\uf15c</i>&nbsp;&nbsp;{getLocalizedData("report")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
                 </h1>
             <div class='formlayout'>
-                <div>Tags:</div> <div>{filtertext}</div>
-                <div>Date range:</div> <div></div>
-                <div>Grouping:</div> <select>
-                                        <option value='none'>none</option>
-                                        <option value='tagz'>tags</option>
-                                        <option value='date'>date</option>
-                                        <option value='tagz/date'>tags / date</option>
-                                        <option value='date/tagz'>date / tags</option>
+                <div>{getLocalizedData("tags")}:</div> <div>{filtertext}</div>
+                <div>{getLocalizedData("report-date-range")}:</div> <div></div>
+                <div>{getLocalizedData("report-grouping")}:</div> <select>
+                                        <option value='none'>-</option>
+                                        <option value='tagz'>{getLocalizedData("tags-small")}</option>
+                                        <option value='date'>{getLocalizedData("report-grouping")}</option>
+                                        <option value='tagz/date'>{getLocalizedData("tags-small")} / {getLocalizedData("date-small")}</option>
+                                        <option value='date/tagz'>{getLocalizedData("date-small")} / {getLocalizedData("tags-small")}</option>
                                      </select>
-                <div>Tag order:</div> <label><input type='checkbox' /> Hide secondary tags</label>
-                <div>Format:</div> <label><input type='checkbox' /> Hours in decimals</label>
-                <div>Details:</div> <label><input type='checkbox' checked /> Show records</label>
+                <div>{getLocalizedData("tag-order")}:</div> <label><input type='checkbox' /> {getLocalizedData("hide-secondary-tags")}</label>
+                <div>{getLocalizedData("format")}:</div> <label><input type='checkbox' /> {getLocalizedData("hours-in-decimals")}</label>
+                <div>{getLocalizedData("details")}:</div> <label><input type='checkbox' checked /> {getLocalizedData("show-records")}</label>
                 <button type='button'><i class='fas'>\uf328</i>&nbsp;&nbsp;{self._copybuttext}</button>
-                    <div>to paste in a spreadsheet</div>
-                <button type='button'><i class='fas'>\uf0ce</i>&nbsp;&nbsp;Save CSV</button>
-                    <div>to save as spreadsheet (with more details)</div>
-                <button type='button'><i class='fas'>\uf1c1</i>&nbsp;&nbsp;Save PDF</button>
-                    <div>to archive or send to a client</div>
+                    <div>{getLocalizedData("to-paste-in-spreadsheet")}</div>
+                <button type='button'><i class='fas'>\uf0ce</i>&nbsp;&nbsp;{getLocalizedData("save-csv")}</button>
+                    <div>{getLocalizedData("to-save-as-spreadsheet")}</div>
+                <button type='button'><i class='fas'>\uf1c1</i>&nbsp;&nbsp;{getLocalizedData("save-pdf")}</button>
+                    <div>{getLocalizedData("to-archive-or-send")}</div>
             </div>
             <hr />
             <table id='report_table'></table>
@@ -2684,7 +2671,7 @@ class ReportDialog(BaseDialog):
         total = 0
         for tagz in name_map.keys():
             total += stats[tagz]
-        rows.append(["head", duration2str(total), "Total", 0])
+        rows.append(["head", duration2str(total), getLocalizedData("total"), 0])
 
         for group in group_list:
             # Add row for total of this tag combi
@@ -2850,9 +2837,9 @@ class ReportDialog(BaseDialog):
         doc.setFontSize(11)
         doc.text("Tags:  ", margin + 20, margin + 15, {"align": "right"})
         doc.text(tagname, margin + 20, margin + 15)
-        doc.text("From:  ", margin + 20, margin + 20, {"align": "right"})
+        doc.text(getLocalizedData("from") + ":  ", margin + 20, margin + 20, {"align": "right"})
         doc.text(d1, margin + 20, margin + 20)
-        doc.text("To:  ", margin + 20, margin + 25, {"align": "right"})
+        doc.text(getLocalizedData("to") + ":  ", margin + 20, margin + 25, {"align": "right"})
         doc.text(d2, margin + 20, margin + 25)
 
         # Prepare drawing table
