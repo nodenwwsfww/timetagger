@@ -24,7 +24,7 @@ async function refresh_auth_status() {
         el.setAttribute("data-i18n-key", "notify-logged-as");
         el.innerHTML = "Logged in as ";
         translateElement(el);
-        let html = '<b>' + auth.username + '</b>';
+        let html = ' <b>' + auth.username + '</b>';
         //html += "<br>Web token valid until ";
         //html += new window.Date(auth.exp * 1000).toISOString().split("T")[0];
         //html += " (will be auto-renewed)";
