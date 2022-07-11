@@ -5,6 +5,8 @@ const localesData = {
     "btn-cancel": "Отмена",
     "btn-delete": "Удалить",
     "btn-resume": "Продолжить",
+    "btn-apply": "Применить",
+    "btn-rename": "Переименовать",
     "btn-refresh": "Обновить",
     "btn-login": "Авторизация",
     "btn-logout": "Выйти",
@@ -210,7 +212,16 @@ const localesData = {
     "chars-small": "chars",
     "tags": "Tags",
     "tags-use-example": "Use e.g. '&#35;meeting' to add one or more tags.",
-    "tags-duplicate": "<br>Duplicate tags: "
+    "tags-duplicate": "<br>Duplicate tags: ",
+    "target-hours-per": "hours per",
+    "target-day": "Day",
+    "target-week": "Week",
+    "target-month": "Month",
+    "target-year": "Year",
+    "tag-combo": "Tag combo",
+    "target": "Target",
+    "buttons-for-tags": "buttons for tags go here",
+    "target-goes": "target goes here"
 
   },
 
@@ -219,6 +230,8 @@ const localesData = {
     "btn-cancel": "Cancel",
     "btn-delete": "Delete",
     "btn-resume": "Resume",
+    "btn-apply": "Apply",
+    "btn-rename": "Rename",
     "btn-refresh": "Refresh",
     "btn-login": "Log in",
     "btn-logout": "Log out",
@@ -428,7 +441,16 @@ const localesData = {
     "chars-small": "chars",
     "tags": "Tags",
     "tags-use-example": "Use e.g. '&#35;meeting' to add one or more tags.",
-    "tags-duplicate": "<br>Duplicate tags: "
+    "tags-duplicate": "<br>Duplicate tags: ",
+    "target-hours-per": "hours per",
+    "target-day": "Day",
+    "target-week": "Week",
+    "target-month": "Month",
+    "target-year": "Year",
+    "tag-combo": "Tag combo",
+    "target": "Target",
+    "buttons-for-tags": "buttons for tags go here",
+    "target-goes": "target goes here"
 
   },
   "tr": {

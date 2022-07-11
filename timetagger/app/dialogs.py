@@ -1654,13 +1654,13 @@ class TargetHelper:
 
         div.innerHTML = f"""
             <input type='number' min=1 value=1 style='width:5em;' />
-            <span style='padding: 0 1em;'>hours per</span>
+            <span style='padding: 0 1em;'>{getLocalizedData("target-hours-per")}</span>
             <select>
-                <option value='none'>No target</option>
-                <option value='day'>Day</option>
-                <option value='week'>Week</option>
-                <option value='month'>Month</option>
-                <option value='year'>Year</option>
+                <option value='none'>{getLocalizedData("target-no")}</option>
+                <option value='day'>{getLocalizedData("target-day")}</option>
+                <option value='week'>{getLocalizedData("target-week")}</option>
+                <option value='month'>{getLocalizedData("target-month")}</option>
+                <option value='year'>{getLocalizedData("target-year")}</option>
             </select>
             """
 
@@ -1700,18 +1700,18 @@ class TagComboDialog(BaseDialog):
         self._tagz = tagz = tags.join(" ")
 
         self.maindiv.innerHTML = f"""
-            <h1><i class='fas'>\uf02c</i>&nbsp;&nbsp;Tag combo {tagz}
+            <h1><i class='fas'>\uf02c</i>&nbsp;&nbsp;{getLocalizedData('tag-combo')} {tagz}
                 <button type='button'><i class='fas'>\uf00d</i></button>
                 </h1>
-            <h2><i class='fas'>\uf02c</i>&nbsp;&nbsp;Tags</h2>
-            <div>buttons for tags go here</div>
-            <h2><i class='fas'>\uf140</i>&nbsp;&nbsp;Target</h2>
-            <div>target goes here</div>
+            <h2><i class='fas'>\uf02c</i>&nbsp;&nbsp;{getLocalizedData('tags')}</h2>
+            <div>{getLocalizedData('buttons-for-tags')}</div>
+            <h2><i class='fas'>\uf140</i>&nbsp;&nbsp;{getLocalizedData('target')}</h2>
+            <div>{getLocalizedData('target-goes')}</div>
             <div style='margin-top:2em;'></div>
             <div style='display: flex;justify-content: flex-end;'>
-                <button type='button' class='actionbutton'><i class='fas'>\uf304</i>&nbsp;&nbsp;Rename</button>
-                <button type='button' class='actionbutton'><i class='fas'>\uf00d</i>&nbsp;&nbsp;Cancel</button>
-                <button type='button' class='actionbutton submit'><i class='fas'>\uf00c</i>&nbsp;&nbsp;Apply</button>
+                <button type='button' class='actionbutton'><i class='fas'>\uf304</i>&nbsp;&nbsp;{getLocalizedData('btn-rename')}</button>
+                <button type='button' class='actionbutton'><i class='fas'>\uf00d</i>&nbsp;&nbsp;{getLocalizedData('btn-cancel')}</button>
+                <button type='button' class='actionbutton submit'><i class='fas'>\uf00c</i>&nbsp;&nbsp;{getLocalizedData('btn-apply')}</button>
             </div>
         """
 
