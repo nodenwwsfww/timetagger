@@ -1325,13 +1325,13 @@ class RecordDialog(BaseDialog):
         be called without arguments.
         """
         self._record = record.copy()
-        assert mode.lower() in ("start", "new", "edit", "stop")
+        assert mode.lower() in getLocalizedData("record-keys") or ("start", "new", "edit", "stop")
 
         html = f"""
-            <h1><i class='fas'>\uf682</i>&nbsp;&nbsp;<span>Record</span>
+            <h1><i class='fas'>\uf682</i>&nbsp;&nbsp;<span>{getLocalizedData("record")}</span>
                 <button type='button'><i class='fas'>\uf00d</i></button>
             </h1>
-            <h2><i class='fas'>\uf305</i>&nbsp;&nbsp;Description</h2>
+            <h2><i class='fas'>\uf305</i>&nbsp;&nbsp;{getLocalizedData("description")}</h2>
             <div class='container' style='position: relative;'>
                 <input type='text' style='width:100%;' spellcheck='true' />
                 <div class='tag-suggestions-autocomp'></div>
@@ -1340,22 +1340,22 @@ class RecordDialog(BaseDialog):
                 <button type='button' style='float:right; font-size:85%; margin-top:-4px;'>
                     <i class='fas'>\uf044</i></button>
                 <button type='button' style='float:right; font-size:85%; margin-top:-4px;'>
-                    Presets <i class='fas'>\uf0d7</i></button>
+                    {getLocalizedData("presets")} <i class='fas'>\uf0d7</i></button>
                 <button type='button' style='float:right; font-size:85%; margin-top:-4px;'>
-                    Recent <i class='fas'>\uf0d7</i></button>
+                    {getLocalizedData("recent")} <i class='fas'>\uf0d7</i></button>
             </div>
             <div></div>
             <div style='color:#777;'></div>
-            <h2><i class='fas'>\uf017</i>&nbsp;&nbsp;Time</h2>
+            <h2><i class='fas'>\uf017</i>&nbsp;&nbsp;{getLocalizedData("time")}</h2>
             <div></div>
             <div style='margin-top:2em;'></div>
             <div style='display: flex;justify-content: flex-end;'>
-                <button type='button' class='actionbutton'><i class='fas'>\uf00d</i>&nbsp;&nbsp;Cancel</button>
-                <button type='button' class='actionbutton'><i class='fas'>\uf1f8</i>&nbsp;&nbsp;Delete</button>
-                <button type='button' class='actionbutton'><i class='fas'>\uf24d</i>&nbsp;&nbsp;Resume</button>
-                <button type='button' class='actionbutton submit'>Submit</button>
+                <button type='button' class='actionbutton'><i class='fas'>\uf00d</i>&nbsp;&nbsp;{getLocalizedData("btn-cancel")}</button>
+                <button type='button' class='actionbutton'><i class='fas'>\uf1f8</i>&nbsp;&nbsp;{getLocalizedData("btn-delete")}</button>
+                <button type='button' class='actionbutton'><i class='fas'>\uf24d</i>&nbsp;&nbsp;{getLocalizedData("btn-resume")}</button>
+                <button type='button' class='actionbutton submit'>{getLocalizedData("btn-submit")}</button>
             </div>
-            <button type='button' style='float:right;' class='actionbutton'>Confirm deleting this record</button>
+            <button type='button' style='float:right;' class='actionbutton'>{getLocalizedData("record-confirm-deleting")}</button>
         """
         self.maindiv.innerHTML = html
 
@@ -1439,38 +1439,38 @@ class RecordDialog(BaseDialog):
 
     def _set_mode(self, mode):
         self._lmode = lmode = mode.lower()
-        self._title_div.innerText = f"{mode} record"
+        self._title_div.innerText = f"{mode} {getLocalizedData('record-small')}"
         is_running = self._record.t1 == self._record.t2
         # has_running = len(window.store.records.get_running_records()) > 0
         # Set description placeholder
         if lmode == "start":
-            self._ds_input.setAttribute("placeholder", "What are you going to do?")
+            self._ds_input.setAttribute("placeholder", getLocalizedData("record-start-placeholder"))
         elif lmode == "new":
-            self._ds_input.setAttribute("placeholder", "What have you done?")
+            self._ds_input.setAttribute("placeholder", getLocalizedData("record-new-deleting"))
         elif lmode == "stop":
-            self._ds_input.setAttribute("placeholder", "What did you just do?")
+            self._ds_input.setAttribute("placeholder", getLocalizedData("record-stop-deleting"))
         elif is_running:
-            self._ds_input.setAttribute("placeholder", "What are you doing?")
+            self._ds_input.setAttribute("placeholder", getLocalizedData("record-run-deleting"))
         else:
-            self._ds_input.setAttribute("placeholder", "What has been done?")
+            self._ds_input.setAttribute("placeholder", getLocalizedData("record-other-deleting"))
         # Tweak the buttons at the bottom
         if lmode == "start":
-            self._submit_but.innerHTML = "<i class='fas'>\uf04b</i>&nbsp;&nbsp;Start"
+            self._submit_but.innerHTML = "<i class='fas'>\uf04b</i>&nbsp;&nbsp;" + getLocalizedData('start')
             self._resume_but.style.display = "none"
             self._delete_but1.style.display = "none"
         elif lmode == "new":
-            self._submit_but.innerHTML = "<i class='fas'>\uf067</i>&nbsp;&nbsp;Create"
+            self._submit_but.innerHTML = "<i class='fas'>\uf067</i>&nbsp;&nbsp;" + getLocalizedData('create')
             self._resume_but.style.display = "none"
             self._delete_but1.style.display = "none"
         elif lmode == "edit":
-            self._submit_but.innerHTML = "<i class='fas'>\uf304</i>&nbsp;&nbsp;Edit"
-            title_mode = "Edit running" if is_running else "Edit"
-            self._title_div.innerText = f"{title_mode} record"
+            self._submit_but.innerHTML = "<i class='fas'>\uf304</i>&nbsp;&nbsp;" + getLocalizedData("edit")
+            title_mode = getLocalizedData('edit-running') if is_running else getLocalizedData("edit")
+            self._title_div.innerText = f"{title_mode} {getLocalizedData('record-small')}"
             self._submit_but.disabled = self._no_user_edit_yet
             self._resume_but.style.display = "none" if is_running else "block"
             self._delete_but1.style.display = "block"
         elif lmode == "stop":
-            self._submit_but.innerHTML = "<i class='fas'>\uf04d</i>&nbsp;&nbsp;Stop"
+            self._submit_but.innerHTML = "<i class='fas'>\uf04d</i>&nbsp;&nbsp;" + getLocalizedData('stop')
             self._resume_but.style.display = "none"
             self._delete_but1.style.display = "block"
         else:
@@ -1490,7 +1490,7 @@ class RecordDialog(BaseDialog):
             self._ds_input.value = self._ds_input.value.slice(0, stores.STR_MAX)
             if "max" not in self._ds_header.innerHTML:
                 self._ds_header.innerHTML += (
-                    f" <small>(max {stores.STR_MAX-1} chars)</small>"
+                    f" <small>({getLocalizedData('max-small')} {stores.STR_MAX-1} {getLocalizedData('chars-small')})</small>"
                 )
             self._ds_input.style.setProperty("outline", "dashed 2px red")
             reset = lambda: self._ds_input.style.setProperty("outline", "")
@@ -1545,7 +1545,7 @@ class RecordDialog(BaseDialog):
         """Get all current tags. If different, update suggestions."""
         # Show info about current tags in description
         tags, parts = utils.get_tags_and_parts_from_string(self._ds_input.value)
-        tags_html = "Tags:&nbsp; &nbsp;"
+        tags_html = f"{getLocalizedData('tags')}:&nbsp; &nbsp;"
         if len(tags) == 0:
             tags = ["#untagged"]
         tags_list = []
@@ -1556,7 +1556,7 @@ class RecordDialog(BaseDialog):
         # Get hints
         hint_html = ""
         if not self._autocompleter.has_recent_tags():
-            hint_html = "Use e.g. '&#35;meeting' to add one or more tags."
+            hint_html = getLocalizedData('tags-use-example')
         # Detect duplicate tags
         tag_counts = {}
         for part in parts:
@@ -1564,7 +1564,7 @@ class RecordDialog(BaseDialog):
                 tag_counts[part] = tag_counts.get(part, 0) + 1
         duplicates = [tag for tag, count in tag_counts.items() if count > 1]
         if len(duplicates):
-            hint_html += "<br>Duplicate tags: " + duplicates.join(" ")
+            hint_html += getLocalizedData("tags-duplicate") + duplicates.join(" ")
         # Apply
         self._tag_hints_div.innerHTML = hint_html
         self._tags_div.innerHTML = tags_html
@@ -2202,20 +2202,18 @@ class SearchDialog(BaseDialog):
 
     def open(self):
 
-        self.maindiv.innerHTML = """
-            <h1><i class='fas'>\uf002</i>&nbsp;&nbsp;Search records and tags
+        self.maindiv.innerHTML = f"""
+            <h1><i class='fas'>\uf002</i>&nbsp;&nbsp;{getLocalizedData("search-records")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
                 </h1>
-            <p>This tool allows you to search records by tags and plain text.
-            You can then edit the records in the list, or manage the selected tags.<br><br>
-            </p>
+            <p>{getLocalizedData("search-records-span")}</p>
             <div class='container' style='position: relative;'>
                 <input type='text' style='width:100%;' spellcheck='false' />
                 <div class='tag-suggestions-autocomp'></div>
             </div>
             <br>
-            <button type='button'>Search</button>
-            <button type='button'>Manage tags</button>
+            <button type='button'>{getLocalizedData("search")}</button>
+            <button type='button'>{getLocalizedData("manage-tags")}</button>
             <hr />
             <div class='record_grid' style='min-height:100px'></div>
         """
@@ -2235,7 +2233,7 @@ class SearchDialog(BaseDialog):
         ) = self.maindiv.children
 
         self._search_input, self._autocompleter_div = search_container.children
-        self._search_input.placeholder = "Tags or text to search for ..."
+        self._search_input.placeholder = getLocalizedData("search-placeholder")
 
         self._search_input.oninput = self._on_user_edit
         self._search_input.onchange = self._on_user_edit_done
@@ -2292,10 +2290,10 @@ class SearchDialog(BaseDialog):
 
         # Process search button
         if ntags > 0 or nstrings > 0:
-            self._search_but.innerHTML = f"Search {ntags} tags and {nstrings} strings"
+            self._search_but.innerHTML = f"{getLocalizedData('search')} {ntags} {getLocalizedData('tags-and')} {nstrings} {getLocalizedData('strings-small')}"
             self._search_but.disabled = False
         else:
-            self._search_but.innerHTML = "Search"
+            self._search_but.innerHTML = getLocalizedData("search")
             self._search_but.disabled = True
 
         # Process tags button
@@ -2304,10 +2302,10 @@ class SearchDialog(BaseDialog):
                 icon = "<i class='fas'>\uf02b</i>&nbsp;&nbsp;"
             else:
                 icon = "<i class='fas'>\uf02c</i>&nbsp;&nbsp;"
-            self._tagmanage_but.innerHTML = f"{icon} Manage {tags.join(' ')}"
+            self._tagmanage_but.innerHTML = f"{icon} {getLocalizedData('manage')} {tags.join(' ')}"
             self._tagmanage_but.disabled = False
         else:
-            self._tagmanage_but.innerHTML = "Manage tags"
+            self._tagmanage_but.innerHTML = getLocalizedData("manage-tags")
             self._tagmanage_but.disabled = True
 
     def _on_key(self, e):
@@ -2361,7 +2359,7 @@ class SearchDialog(BaseDialog):
         # Generate html
         bold_tags = [f"<b>{tag}</b>" for tag in self._current_tags]
         italic_strings = [f"<i>'{tag}'</i>" for tag in self._current_strings]
-        find_html = f"Searching records for"
+        find_html = getLocalizedData("searching-records")
         if len(self._current_tags) > 0:
             find_html += " tag" + ("s" if len(self._current_tags) > 1 else "")
             find_html += " " + ", ".join(bold_tags)
@@ -2387,7 +2385,7 @@ class SearchDialog(BaseDialog):
 
     def _open_record(self, key):
         record = window.store.records.get_by_key(key)
-        self._canvas.record_dialog.open("Edit", record, self._show_records)
+        self._canvas.record_dialog.open(getLocalizedData("edit"), record, self._show_records)
 
     def _open_tag_dialog(self):
         if len(self._current_tags) == 1:
@@ -2952,21 +2950,19 @@ class ExportDialog(BaseDialog):
 
     def open(self, callback=None):
         self.maindiv.innerHTML = f"""
-            <h1><i class='fas'>\uf56e</i>&nbsp;&nbsp;Export
+            <h1><i class='fas'>\uf56e</i>&nbsp;&nbsp;{getLocalizedData("export")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
             </h1>
             <p>
-            The table below contains all your records. This can be
-            useful for backups, processing, or to move your data
-            elsewhere.
+            {getLocalizedData("export-span")}
             </p><p>&nbsp;</p>
             <div>
-                <span>Date-time format:</span>
+                <span>{getLocalizedData("export-date-format")}</span>
                 &nbsp;<input type="radio" name="dtformat" value="local" checked> Local</input>
                 &nbsp;<input type="radio" name="dtformat" value="unix"> Unix</input>
                 &nbsp;<input type="radio" name="dtformat" value="iso"> ISO 8601</input>
             </div>
-            <button type='button'>Copy</button>
+            <button type='button'>{getLocalizedData("copy")}</button>
             <hr />
             <table id='export_table'></table>
             """
@@ -3005,6 +3001,7 @@ class ExportDialog(BaseDialog):
 
         # Add header
         lineparts = ["key", "start", "stop", "tags", "description"]
+        lineparts = getLocalizedData("export-keys")
         lines.append("<tr><th>" + lineparts.join("</th><th>") + "</th></tr>")
 
         # Parse all items
@@ -3035,18 +3032,18 @@ class ExportDialog(BaseDialog):
                 return
 
         # Done
-        self._copy_but.innerHTML = "Copy export-table <i class='fas'>\uf0ea</i>"
+        self._copy_but.innerHTML = f"""{getLocalizedData("export-copy")} <i class='fas'>\uf0ea</i>"""
         self._table_element.innerHTML = lines.join("\n")
         self._copy_but.disabled = False
 
     def _copy_clipboard(self):
         table = self.maindiv.children[-1]
         tools.copy_dom_node(table)
-        self._copy_but.innerHTML = "Copy export-table <i class='fas'>\uf46c</i>"
+        self._copy_but.innerHTML = f"""{getLocalizedData("export-copy")} <i class='fas'>\uf46c</i>"""
         window.setTimeout(self._reset_copy_but_text, 800)
 
     def _reset_copy_but_text(self):
-        self._copy_but.innerHTML = "Copy export-table <i class='fas'>\uf0ea</i>"
+        self._copy_but.innerHTML = f"""{getLocalizedData("export-copy")} <i class='fas'>\uf0ea</i>"""
 
 
 class ImportDialog(BaseDialog):
@@ -3057,18 +3054,14 @@ class ImportDialog(BaseDialog):
 
     def open(self, callback=None):
         self.maindiv.innerHTML = f"""
-            <h1><i class='fas'>\uf56f</i>&nbsp;&nbsp;Import
+            <h1><i class='fas'>\uf56f</i>&nbsp;&nbsp;{getLocalizedData("import")}
                 <button type='button'><i class='fas'>\uf00d</i></button>
             </h1>
             <p>
-            Copy your table data (from e.g. a CSV file, a text file, or
-            directly from Excel) and paste it in the text field below.
-            CSV files can be dragged into the text field.
-            See <a href='https://timetagger.app/articles/importing/'>this article</a>
-            for details.
+            {getLocalizedData("import-span")}
             </p><p>&nbsp;</p>
-            <button type='button'>Analyse</button>
-            <button type='button'>Import</button>
+            <button type='button'>{getLocalizedData("analyse")}</button>
+            <button type='button'>{getLocalizedData("import")}</button>
             <hr />
             <div></div>
             <textarea rows='12'
@@ -3087,10 +3080,7 @@ class ImportDialog(BaseDialog):
             or window.store.__name__.startswith("Sandbox")
         ):
             maintext = self.maindiv.children[2]
-            maintext.innerHTML += """
-                Consider importing into the
-                <a target='new' href='sandbox'>Sandbox</a> first.
-                """
+            maintext.innerHTML += getLocalizedData("export-consider-sandbox")
 
         self._analysis_out = self.maindiv.children[-2]
 
@@ -3143,7 +3133,7 @@ class ImportDialog(BaseDialog):
         # Prepare
         self._analyzing = True
         self._import_but.disabled = True
-        self._import_but.innerHTML = "Import"
+        self._import_but.innerHTML = getLocalizedData("import")
         self._records2import = []
         # Run
         try:
@@ -3152,7 +3142,7 @@ class ImportDialog(BaseDialog):
             console.warn(str(err))
         # Restore
         self._analyzing = False
-        self._import_but.innerHTML = "Import"
+        self._import_but.innerHTML = getLocalizedData("import")
         if len(self._records2import) > 0:
             self._import_but.disabled = False
 
@@ -3175,13 +3165,13 @@ class ImportDialog(BaseDialog):
             if header.count(x) > sepcount:
                 sep, sepname, sepcount = x, name, header.count(x)
         if not header:
-            log("No data")
+            log(getLocalizedData("no-data"))
             return
         elif not sepcount or not sep:
-            log("Could not determine separator (tried tab, comma, semicolon)")
+            log(getLocalizedData("could-not-determine"))
             return
         else:
-            log("Looks like the separator is " + sepname)
+            log(getLocalizedData("looks-like-separator") + sepname)
 
         # Get mapping to parse header names
         M = {
@@ -3223,16 +3213,16 @@ class ImportDialog(BaseDialog):
         while headerparts2 and headerparts2[-1] is None:
             headerparts2.pop(-1)
         if headerparts_unknown:
-            log("Ignoring some headers: " + headerparts_unknown.join(", "))
+            log(getLocalizedData("analyse-ignore-some-headers") + headerparts_unknown.join(", "))
         else:
-            log("All headers names recognized")
+            log(getLocalizedData("analyse-headers-recognized"))
 
         # All required names headers present?
         if "t1" not in headerparts2:
-            log("Missing required header for start time.")
+            log(getLocalizedData("analyse-miss-required-header-start"))
             return
         elif "t2" not in headerparts2 and "duration" not in headerparts2:
-            log("Missing required header for stop time or duration.")
+            log(getLocalizedData("analyse-miss-required-header-stop"))
             return
 
         # Get dict to map (t1, t2) to record key
@@ -3374,7 +3364,7 @@ class ImportDialog(BaseDialog):
         window.store.records.put(*self._records2import)
         self._records2import = []
         self._import_but.disabled = True
-        self._import_but.innerHTML = "Import done"
+        self._import_but.innerHTML = getLocalizedData("import-done")
 
 
 class SettingsDialog(BaseDialog):
