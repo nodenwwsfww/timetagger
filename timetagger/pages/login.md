@@ -40,11 +40,39 @@ async function login_localhost() {
 }
 
 
-async function login_credentials() {
+async function login_credentials(username) {
     let input_u = document.getElementById("input_u");
     console.log("try login");
-    await login({"method": "username", "username": input_u.value});
+    let usernameValue = username;
+
+    if (!usernameValue) usernameValue = input_u.value;
+
+    await login({"method": "username", "username": usernameValue});
 }
+
+async function login_yandex() {
+    function initPlayer() {
+      return window.ysdk.getPlayer().then((_player) => {
+        var player = _player;
+
+        return player;
+      });
+    }
+
+    initPlayer().then((_player) => {
+      window.ysdk.auth.openAuthDialog().then(async () => {
+        try {
+            const username = _player.getUniqueID();
+            console.log('success login yandex');
+            login_credentials(username);
+        } catch (e) {
+            console.error('unknown error with yandex', e);
+        }
+      });
+    });
+}
+
+
 
 async function load() {
     let buttonLogin = document.getElementById("submit_up");
@@ -53,8 +81,7 @@ async function load() {
     buttonLogin.onclick = login_credentials;
     console.log("add onclick");
 
-    buttonLogin.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
-
+    login_yandex();
 
     if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
         if (but2) but2.style.display = "block";
