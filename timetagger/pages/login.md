@@ -43,7 +43,7 @@ async function login_localhost() {
 async function login_credentials() {
     let input_u = document.getElementById("input_u");
     console.log("try login");
-    await login({"method": "username", "username": input_u.value);
+    await login({"method": "username", "username": input_u.value});
 }
 
 async function load() {
@@ -51,14 +51,13 @@ async function load() {
     let but2 = document.getElementById("submit_localhost");
 
     buttonLogin.onclick = login_credentials;
-    but2.onclick = login_localhost;
-    buttonLoginAsDefault.onclick = login_default;
+    console.log("add onclick");
 
     buttonLogin.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
 
 
     if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
-        but2.style.display = "block";
+        if (but2) but2.style.display = "block";
     }
 }
 
