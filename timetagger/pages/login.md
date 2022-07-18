@@ -42,15 +42,16 @@ async function login_localhost() {
 
 async function login_credentials() {
     let input_u = document.getElementById("input_u");
+    console.log('try login')
     await login({"method": "username", "username": input_u.value);
 }
 
 async function load() {
-    let but1 = document.getElementById("submit_up");
+    let buttonLogin = document.getElementById("submit_up");
     let but2 = document.getElementById("submit_localhost");
     //let input_p = document.getElementById("input_p");
 
-    but1.onclick = login_credentials;
+    buttonLogin.onclick = login_credentials;
     but2.onclick = login_localhost;
     buttonLoginAsDefault.onclick = login_default;
 
