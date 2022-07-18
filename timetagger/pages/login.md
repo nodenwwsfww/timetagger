@@ -42,7 +42,7 @@ async function login_localhost() {
 
 async function login_credentials() {
     let input_u = document.getElementById("input_u");
-    console.log('try login')
+    console.log("try login");
     await login({"method": "username", "username": input_u.value);
 }
 
