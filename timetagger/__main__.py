@@ -132,15 +132,15 @@ async def get_webtoken(request):
     print(request, auth_info)
     if method == "localhost":
         return await get_webtoken_localhost(request, auth_info)
-    elif method == "usernamepassword":
-        return await get_webtoken_usernamepassword(request, auth_info)
-    elif method == "login_default":
-        return await get_webtoken_default(request, auth_info)
+    elif method == "usernamepassword_legacy":
+        return await get_webtoken_usernamepassword_legacy(request, auth_info)
+    elif method == "username":
+        return await get_webtoken_username(request, auth_info)
     else:
         return 401, {}, f"Invalid authentication method: {method}"
 
 
-async def get_webtoken_usernamepassword(request, auth_info):
+async def get_webtoken_usernamepassword_legacy(request, auth_info):
     """An authentication handler to exchange credentials for a webtoken.
     The credentials are set via the config and are intended to support
     a handful of users. See `get_webtoken_unsafe()` for details.
@@ -173,12 +173,13 @@ async def get_webtoken_localhost(request, auth_info):
     token = await get_webtoken_unsafe("defaultuser")
     return 200, {}, dict(token=token)
 
-async def get_webtoken_default(request, auth_info):
+async def get_webtoken_username(request, auth_info):
     """An authentication handler that provides a webtoken default. See `get_webtoken_unsafe()` for details.
     """
-    
-    # Return the webtoken for the default user
-    token = await get_webtoken_unsafe("motherfucker")
+    user = auth_info.get("username", "").strip()
+
+    # Return the webtoken for the user
+    token = await get_webtoken_unsafe(user)
     return 200, {}, dict(token=token)
 
 def load_credentials():

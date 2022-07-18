@@ -39,28 +39,22 @@ async function login_localhost() {
     await login({"method": "localhost"});
 }
 
-async function login_default() {
-        await login({"method": "login_default"});
-}
 
 async function login_credentials() {
     let input_u = document.getElementById("input_u");
-    let input_p = document.getElementById("input_p");
-    await login({"method": "usernamepassword", "username": input_u.value, "password": input_p.value});
+    await login({"method": "username", "username": input_u.value);
 }
 
 async function load() {
     let but1 = document.getElementById("submit_up");
     let but2 = document.getElementById("submit_localhost");
-    let input_p = document.getElementById("input_p");
-
-    const buttonLoginAsDefault = document.getElementById("submit_login_default");
+    //let input_p = document.getElementById("input_p");
 
     but1.onclick = login_credentials;
     but2.onclick = login_localhost;
     buttonLoginAsDefault.onclick = login_default;
 
-    input_p.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
+    //input_p.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
 
 
     if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
@@ -72,14 +66,15 @@ window.addEventListener('load', load);
 </script>
 
 <input id='input_u' type='text' data-i18n-key="placeholder-username" placeholder='username' style='margin:4px;'/><br />
-<input id='input_p' type='password' data-i18n-key="placeholder-password" placeholder='password' style='margin:4px;'/><br />
+
+[//]: # (<input id='input_p' type='password' data-i18n-key="placeholder-password" placeholder='password' style='margin:4px;'/><br />)
 <button id='submit_up' class='whitebutton' style='margin:4px;' data-i18n-key="btn-submit">
     Submit
 </button>
 
 <br />
 
-<button id='submit_login_default' class='whitebutton' style='margin:4px;' data-i18n-key="login-as-default">Just Login as default user</button>
+[//]: # (<button id='submit_login_default' class='whitebutton' style='margin:4px;' data-i18n-key="login-as-default">Just Login as default user</button>)
 <button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' data-i18n-key="login-as-localhost" >Login as default user (on localhost)</button>
 
 <br/>
