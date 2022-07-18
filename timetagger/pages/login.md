@@ -49,13 +49,12 @@ async function login_credentials() {
 async function load() {
     let buttonLogin = document.getElementById("submit_up");
     let but2 = document.getElementById("submit_localhost");
-    //let input_p = document.getElementById("input_p");
 
     buttonLogin.onclick = login_credentials;
     but2.onclick = login_localhost;
     buttonLoginAsDefault.onclick = login_default;
 
-    //input_p.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
+    buttonLogin.onkeydown = function (e) { if (e.key == "Enter" || e.key == "Return") {login_credentials();} };
 
 
     if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
@@ -67,16 +66,11 @@ window.addEventListener('load', load);
 </script>
 
 <input id='input_u' type='text' data-i18n-key="placeholder-username" placeholder='username' style='margin:4px;'/><br />
-
-[//]: # (<input id='input_p' type='password' data-i18n-key="placeholder-password" placeholder='password' style='margin:4px;'/><br />)
 <button id='submit_up' class='whitebutton' style='margin:4px;' data-i18n-key="btn-submit">
     Submit
 </button>
 
 <br />
-
-[//]: # (<button id='submit_login_default' class='whitebutton' style='margin:4px;' data-i18n-key="login-as-default">Just Login as default user</button>)
-<button id='submit_localhost' class='whitebutton' style='margin:4px; display: none;' data-i18n-key="login-as-localhost" >Login as default user (on localhost)</button>
 
 <br/>
 
