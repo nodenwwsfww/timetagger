@@ -129,6 +129,7 @@ async def get_webtoken(request):
     auth_info = json.loads(b64decode(await request.get_body()))
     method = auth_info.get("method", "unspecified")
 
+    print(request, auth_info)
     if method == "localhost":
         return await get_webtoken_localhost(request, auth_info)
     elif method == "usernamepassword":

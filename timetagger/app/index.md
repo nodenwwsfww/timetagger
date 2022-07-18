@@ -1,11 +1,48 @@
 % TimeTagger
 
 <script src='./locale.js'></script>
+<script src="https://yandex.ru/games/sdk/v2"></script>
+<script>
+  YaGames.init({ adv: { onAdvClose: wasShown => { console.info('adv closed!'); }}}).then(ysdk => {
+    console.log('Yandex SDK initialized');
+    window.ysdk = ysdk;
+    var isOpened = false;
+
+    var callbacks = {
+      onOpen: () => {
+        isOpened = true;
+      },
+      onClose: () => {
+        isOpened = false;
+      },
+      onError: (error) => {
+        console.log('errored to show adv: ', error);
+        isOpened = false;
+      }
+    };
+
+    setLocale(ysdk.environment.i18n.lang);
+    console.log('Set locale', ysdk.environment.i18n.lang);
+
+    function showAD() {
+      if (!isOpened) {
+        ysdk.adv.showFullscreenAdv({
+          callbacks: callbacks
+        })
+      }
+    }
+
+    window.showAD = showAD;
+
+    showAD();
+  });
+</script>
+
 
 <script>
 
 window.addEventListener("load", function() {
-    if (!window.browser_supported) {return;}
+    if (!window.browser_supported) return;
     window.store = new window.stores.ConnectedDataStore();
     var canvas_element = document.getElementById('canvas');
     window.canvas = new window.front.TimeTaggerCanvas(canvas_element);
