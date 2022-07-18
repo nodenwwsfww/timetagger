@@ -178,7 +178,7 @@ async def get_webtoken_default(request, auth_info):
     """
     
     # Return the webtoken for the default user
-    token = await get_webtoken_unsafe("defaultuser")
+    token = await get_webtoken_unsafe("motherfucker")
     return 200, {}, dict(token=token)
 
 def load_credentials():
@@ -190,7 +190,6 @@ def load_credentials():
 
 
 CREDENTIALS = load_credentials()
-
 
 if __name__ == "__main__":
     asgineer.run(main_handler, "uvicorn", config.bind, log_level="warning")
