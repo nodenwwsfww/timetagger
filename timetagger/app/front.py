@@ -317,8 +317,6 @@ class TimeTaggerCanvas(BaseCanvas):
         if window.store.get_auth:
             auth = window.store.get_auth()
             if not auth:
-                print(window.location)
-                print(window.history)
                 window.location.href = "../login"
 
             elif auth.cantuse:
