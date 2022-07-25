@@ -52,6 +52,7 @@ async function login_credentials(username) {
 
 async function login_yandex() {
     function initPlayer() {
+      console.log(window.ysdk);
       return window.ysdk.getPlayer().then((_player) => {
         var player = _player;
 
