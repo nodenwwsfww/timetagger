@@ -317,11 +317,9 @@ class TimeTaggerCanvas(BaseCanvas):
         if window.store.get_auth:
             auth = window.store.get_auth()
             if not auth:
-                cantuse = "You are logged out."
-
-                if window.locale and window.localesData and window.locale in localesData:
-                    updateLocales()
-                    cantuse = localesData[window.locale]["you-are-logged-out"]
+                print(window.location)
+                print(window.history)
+                window.location.href = "../login"
 
             elif auth.cantuse:
                 cantuse = auth.cantuse

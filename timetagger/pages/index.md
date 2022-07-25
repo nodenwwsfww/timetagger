@@ -4,5 +4,5 @@
 
 <script src='./app/locale.js'></script>
 <script>
-    window.location.href = "./app/"
+    window.location.href = "./app/";
 </script>

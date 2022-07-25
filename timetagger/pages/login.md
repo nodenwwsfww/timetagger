@@ -2,6 +2,43 @@
 
 <script src='./app/tools.js'></script>
 <script src='./app/locale.js'></script>
+<script src="https://yandex.ru/games/sdk/v2"></script>
+<script>
+  YaGames.init({ adv: { onAdvClose: wasShown => { console.info('adv closed!'); }}}).then(ysdk => {
+    console.log('Yandex SDK initialized');
+    window.ysdk = ysdk;
+    var isOpened = false;
+
+    var callbacks = {
+      onOpen: () => {
+        isOpened = true;
+      },
+      onClose: () => {
+        isOpened = false;
+      },
+      onError: (error) => {
+        console.log('errored to show adv: ', error);
+        isOpened = false;
+      }
+    };
+
+    setLocale(ysdk.environment.i18n.lang);
+    console.log('Set locale', ysdk.environment.i18n.lang);
+
+    function showAD() {
+      if (!isOpened) {
+        ysdk.adv.showFullscreenAdv({
+          callbacks: callbacks
+        })
+      }
+    }
+
+    window.showAD = showAD;
+
+    showAD();
+  });
+</script>
+
 <script>
 async function login(payload) {
     // Reset status
